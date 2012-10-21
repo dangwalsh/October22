@@ -15,12 +15,11 @@ extern "C" {
 #include "term.h"
 }
 
-extern char name[];
+extern char player[];
 extern bool userTurn;
 extern int turn;
 extern int win;
 
-extern void randomChoice();
 extern void checkSpace(int x, int y);
 extern void draw();
 extern void getWinner();

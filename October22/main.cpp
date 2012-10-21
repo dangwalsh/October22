@@ -16,27 +16,11 @@ using namespace std;
 
 int main()
 {
-/*
-    int a[][3] {
-        {0,1,2},
-        {3,0,0},
-        {4,0,0}
-    };
-    
-    const int *p = reinterpret_cast<int *>(a);
-    
-    cout << "cols: " << getCols() << endl;
-    cout << "rows: " << getRows() << endl;
-    
-    getWinner(reinterpret_cast<int *>(a));
-*/
-    char c;
-    //int win = 0;
-    
     cout << "Welcome to another round Tic-Tac-Toe" << endl;
     cout << "\tYou will be the X and I will be the O." << endl;
     cout << "\tWhen you're ready to begin, press a key and off we go..." << endl;
     
+    char c;
     while ((c = term_key()) == '\0') {
     }
     
@@ -47,10 +31,36 @@ int main()
         cout << "Choose a ROW number (0-2)..." << endl;
         int x;
         cin >> x;
+        if (!cin) {
+            cerr << "Sorry, that wasn't a number. Try again." << endl;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            draw();
+            continue;
+        } else if (x < 0 || x > 2) {
+            cerr << "Sorry, that space isn't on the board. Try again." << endl;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            draw();
+            continue;
+        }
         
-        cout << "...and a COLUMN number (0-2):" << endl;
+        cout << "...and a COLUMN number (0-2)..." << endl;
         int y;
         cin >> y;
+        if (!cin) {
+            cerr << "Sorry, that wasn't a number. Try again." << endl;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            draw();
+            continue;
+        } else if (y < 0 || y > 2) {
+            cerr << "Sorry, that space isn't on the board. Try again." << endl;
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            draw();
+            continue;
+        }
         
         checkSpace(x, y);
     }
@@ -60,7 +70,7 @@ int main()
     if (win == 2){
         cout << "Sorry, there is no winner today.";
     } else {
-        cout << "The " << name[win+1] << "'s win!" << endl;
+        cout << "The " << player[win+1] << "'s win!" << endl;
     }
     
     return EXIT_SUCCESS;

@@ -9,15 +9,14 @@
 #include "tic.h"
 using namespace std;
 
-char name[3] = {'O',' ','X'};
-
-
-void randomChoice();
 void move(int x, int y);
+void randomChoice();
 
 bool userTurn = true;
 int turn = 0;
 int win = 0;
+
+char player[3] = {'O',' ','X'};
 
 int a[][3] {
     {0,0,0},
@@ -61,7 +60,7 @@ void draw()
     cout << endl;
     for (int i = 0; i < nrows; ++i) {
         for (int j = 0; j <  ncols; ++j) {
-            cout << name[a[i][j] + 1]; if (j < ncols-1) cout << "|";
+            cout << player[a[i][j] + 1]; if (j < ncols-1) cout << "|";
         }
         cout << endl; if (i < nrows-1) cout << "-+-+-" << endl;
     }
@@ -85,7 +84,7 @@ void move(int x, int y)
     if (!userTurn && win == 0) {
         cout << "Now it's my turn, let me see..." << endl;
         term_wait(3000);
-        cout << "Ok, here we go!" << endl;
+        cout << endl << "Ok, here we go!" << endl;
         randomChoice();
     }
 }
@@ -105,7 +104,8 @@ void checkSpace(int x, int y)
     if (a[x][y] == 0) {
        move(x, y); 
     } else if (userTurn){
-        cout << "Pick another spot, that one is already taken." << endl;
+        cout << endl << "Pick another spot, that one is already taken." << endl;
+        draw();
     } else {
         randomChoice();
     }
