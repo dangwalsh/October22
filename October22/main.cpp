@@ -16,9 +16,9 @@ using namespace std;
 
 int main()
 {
-    cout << "Welcome to another round Tic-Tac-Toe" << endl;
+    cout << "Welcome to another round Tic-Tac-Toe." << endl;
     cout << "\tYou will be the X and I will be the O." << endl;
-    cout << "\tWhen you're ready to begin, press a key and off we go..." << endl;
+    cout << "\tPress any key when you're ready to go. " << endl;
     
     char c;
     while ((c = term_key()) == '\0') {
@@ -64,8 +64,6 @@ int main()
         
         checkSpace(x, y);
     }
-    
-    draw();
     
     if (win == 2){
         cout << "Sorry, there is no winner today.";
