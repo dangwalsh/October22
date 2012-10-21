@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		37D506FD163443FA00F2B41E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37D506FC163443FA00F2B41E /* main.cpp */; };
 		37D506FF163443FA00F2B41E /* October22.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37D506FE163443FA00F2B41E /* October22.1 */; };
+		37D5070D1634597800F2B41E /* tic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37D5070B1634597800F2B41E /* tic.cpp */; };
+		37D507201634910100F2B41E /* term.c in Sources */ = {isa = PBXBuildFile; fileRef = 37D5071F1634910100F2B41E /* term.c */; };
+		37D50727163497BD00F2B41E /* libcurses.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D50726163497BD00F2B41E /* libcurses.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +31,11 @@
 		37D506F8163443FA00F2B41E /* October22 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = October22; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D506FC163443FA00F2B41E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		37D506FE163443FA00F2B41E /* October22.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = October22.1; sourceTree = "<group>"; };
+		37D5070B1634597800F2B41E /* tic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tic.cpp; sourceTree = "<group>"; };
+		37D5070C1634597800F2B41E /* tic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tic.h; sourceTree = "<group>"; };
+		37D5071F1634910100F2B41E /* term.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = term.c; sourceTree = "<group>"; };
+		37D507211634919D00F2B41E /* term.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = term.h; sourceTree = "<group>"; };
+		37D50726163497BD00F2B41E /* libcurses.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurses.dylib; path = usr/lib/libcurses.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37D50727163497BD00F2B41E /* libcurses.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +53,7 @@
 		37D506ED163443FA00F2B41E = {
 			isa = PBXGroup;
 			children = (
+				37D50726163497BD00F2B41E /* libcurses.dylib */,
 				37D506FB163443FA00F2B41E /* October22 */,
 				37D506F9163443FA00F2B41E /* Products */,
 			);
@@ -61,6 +71,10 @@
 			isa = PBXGroup;
 			children = (
 				37D506FC163443FA00F2B41E /* main.cpp */,
+				37D5070C1634597800F2B41E /* tic.h */,
+				37D5070B1634597800F2B41E /* tic.cpp */,
+				37D507211634919D00F2B41E /* term.h */,
+				37D5071F1634910100F2B41E /* term.c */,
 				37D506FE163443FA00F2B41E /* October22.1 */,
 			);
 			path = October22;
@@ -118,6 +132,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				37D506FD163443FA00F2B41E /* main.cpp in Sources */,
+				37D5070D1634597800F2B41E /* tic.cpp in Sources */,
+				37D507201634910100F2B41E /* term.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
