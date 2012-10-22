@@ -15,7 +15,7 @@ extern "C" {
 using namespace std;
 
 int main()
-{
+{    
     cout << "Welcome to another round Tic-Tac-Toe." << endl;
     cout << "\tYou will be the X and I will be the O." << endl;
     cout << "\tPress any key when you're ready to go. " << endl;
@@ -26,7 +26,7 @@ int main()
     
     draw();
     
-    while (win == 0) {
+    while (winner == 0) {
         
         cout << "Choose a ROW number (0-2)..." << endl;
         int x;
@@ -65,10 +65,10 @@ int main()
         checkSpace(x, y);
     }
     
-    if (win == 2){
+    if (winner == 2){
         cout << "Sorry, there is no winner today.";
     } else {
-        cout << "The " << player[win+1] << "'s win!" << endl;
+        cout << "The " << player[winner+1] << "'s win!" << endl;
     }
     
     return EXIT_SUCCESS;

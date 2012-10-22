@@ -9,14 +9,16 @@
 #include "tic.h"
 using namespace std;
 
+int checkVal(int n);
 void move(int x, int y);
 void randomChoice();
+void getWinner();
 
-bool userTurn = true;
+bool isUserTurn = true;
 int turn = 0;
-int win = 0;
+int winner = 0;
 
-char player[3] = {'O',' ','X'};
+const char player[3] = {'O',' ','X'};
 
 int a[][3] {
     {0,0,0},
@@ -27,32 +29,75 @@ int a[][3] {
 const size_t nrows = sizeof a / sizeof a[0];
 const size_t ncols = sizeof a[0] / sizeof a[0][0];
 
+int checkVal(int n) {
+    
+    switch (n) {
+        case -3:
+            return -1;
+        case 3:
+            return 1;
+        default:
+            return 0;
+    }
+    
+}
+
 void getWinner()
 {
-    if (turn > 8) {
-        win = 2;
+    
+/* alternative method for checking array without pointers
+ 
+     int diag1 = a[0][0] + a[1][1] + a[2][2];
+     int diag2 = a[0][2] + a[1][1] + a[2][0];
+     
+     for (int i = 0; i < ncols; ++i) {
+     
+        int horiz = a[i][0] + a[i][1] + a[i][2];
+        int vert = a[0][i] + a[1][i] + a[2][i];
+     
+        if (horiz == 3 || vert == 3) {
+            winner = 1; break;
+        } else if (horiz == -3 || vert == -3) {
+            winner = -1; break;
+        }
+     }
+*/
+    
+    for (int i = 0; i < ncols; ++i){
+        
+        if (i == 0) {
+            
+            int dd = 0;
+            for (int *p = reinterpret_cast<int *>(a) + i; p < reinterpret_cast<int *>(a) + ncols * nrows; p+=4) {
+                dd += *p;
+            }
+            winner = checkVal(dd);
+            if (winner != 0) break;
+            
+            int du = 0;
+            for (int *p = reinterpret_cast<int *>(a) + i + 2; p < reinterpret_cast<int *>(a) + ncols * nrows - 2; p+=2) {
+                du += *p;
+            }
+            winner = checkVal(du);
+            if (winner != 0) break;
+        }
+        
+        int h = 0;
+        for (int *q = reinterpret_cast<int *>(a) + i * 3; q < reinterpret_cast<int *>(a) + (nrows * i + ncols); ++q) {
+            h += *q;
+        }
+        winner = checkVal(h);
+        if (winner != 0) break;
+        
+        int v = 0;
+        for (int *r = reinterpret_cast<int *>(a) + i; r < reinterpret_cast<int *>(a) + (ncols + 4 + i); r+=3) {
+            v += *r;
+        }
+        winner = checkVal(v);
+        if (winner != 0) break;
     }
 
-    int diag1 = a[0][0] + a[1][1] + a[2][2];
-    int diag2 = a[0][2] + a[1][1] + a[2][0];
-    
-    if (diag1 == 3 || diag2 == 3) {
-        win = 1;
-    } else if (diag1 == -3 || diag2 == -3) {
-        win = -1;
-    } else {
-        for (int i=0; i<3; ++i) {
-            
-            int horiz = a[i][0] + a[i][1] + a[i][2];
-            int vert = a[0][i] + a[1][i] + a[2][i];
-            
-            if (horiz == 3 || vert == 3) {
-                win = 1; break;
-            } else if (horiz == -3 || vert == -3) {
-                win = -1; break;
-            }
-        }
-    }
+    if (turn > 8 && winner == 0) winner = 2;
 }
 
 void draw()
@@ -69,7 +114,7 @@ void draw()
 
 void move(int x, int y)
 {
-    if (userTurn) {
+    if (isUserTurn) {
         a[x][y] = 1;
     } else {
         a[x][y] = -1;
@@ -78,10 +123,10 @@ void move(int x, int y)
     
     draw();
     getWinner();
+
+    isUserTurn = !isUserTurn;
     
-    userTurn = !userTurn;
-    
-    if (!userTurn && win == 0) {
+    if (!isUserTurn && winner == 0) {
         cout << "Now it's my turn, let me see..." << endl;
         term_wait(3000);
         cout << endl << "Ok, here we go!" << endl;
@@ -103,7 +148,7 @@ void checkSpace(int x, int y)
 {
     if (a[x][y] == 0) {
        move(x, y); 
-    } else if (userTurn){
+    } else if (isUserTurn){
         cout << endl << "Pick another spot, that one is already taken." << endl;
         draw();
     } else {

@@ -15,13 +15,11 @@ extern "C" {
 #include "term.h"
 }
 
-extern char player[];
-extern bool userTurn;
+extern const char player[];
 extern int turn;
-extern int win;
+extern int winner;
 
 extern void checkSpace(int x, int y);
 extern void draw();
-extern void getWinner();
 
 #endif /* defined(__October22__tic__) */
